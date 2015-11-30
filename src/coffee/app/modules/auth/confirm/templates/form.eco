@@ -1,0 +1,12 @@
+<!-- Users email -->
+<div class="field">
+  <h2 class="ui center aligned header">
+    <%= @t('frontend.views.auth.confirm.header') %>
+  </h2>
+  <p><%= @t('frontend.views.auth.confirm.instruction') %></p>
+</div>
+
+<!-- Form submit -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red button"><%= @t('frontend.form.actions.send.send_repeat') %></button>
+</div>

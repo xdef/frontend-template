@@ -1,0 +1,4 @@
+<a href='javascript:void(null);' data-provider="google_oauth2" class="signin ui large google plus icon button">
+  <i class="google plus icon"></i>
+  <%= @t('frontend.form.actions.sign_with', value: 'Google') %>
+</a>

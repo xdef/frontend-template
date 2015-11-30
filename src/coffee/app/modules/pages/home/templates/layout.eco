@@ -1,0 +1,23 @@
+<!-- Page One -->
+<div class="section">
+  <div class="ui center aligned container">
+    <h1 class="ui header">
+      <div class="content">
+        Страница 1
+        <div class="sub header">Описание страницы 1</div>
+      </div>
+    </h1>
+  </div>
+</div>
+
+<!-- Page Two -->
+<div class="section">
+  <div class="ui center aligned container">
+    <h1 class="ui header">
+      <div class="content">
+        Страница 2
+        <div class="sub header">Описание страницы 2</div>
+      </div>
+    </h1>
+  </div>
+</div>

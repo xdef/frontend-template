@@ -1,0 +1,21 @@
+<!-- Users email -->
+<div class="field">
+  <h2 class="ui header">
+    <%= @t('frontend.views.auth.forgot.header') %>
+  </h2>
+  <p><%= @t('frontend.views.auth.forgot.instruction') %></p>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="required field">
+  <div class="ui left icon input">
+    <input id="email" name="email" type="text" placeholder="<%= @t('frontend.models.user.attributes.email') %>">
+    <i class="mail icon"></i>
+  </div>
+</div>
+
+<!-- Form submit -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red button"><%= @t('frontend.form.actions.send.self') %></button>
+</div>

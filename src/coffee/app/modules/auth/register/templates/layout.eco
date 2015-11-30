@@ -1,0 +1,13 @@
+<div class="ui basic segment">
+  <div class="ui container">
+    <div class="ui middle aligned centered padded stackable very relaxed grid">
+      <div id="providers-region" class="seven wide computer seven wide tablet column"></div>
+
+      <div class="ui vertical divider">
+        <%= @t('frontend.form.helpers.or') %>
+      </div>
+
+      <div id="form-region" class="seven wide computer nine wide tablet column column"></div>
+    </div>
+  </div>
+</div>

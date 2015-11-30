@@ -1,0 +1,27 @@
+<!-- Header -->
+<div class="field">
+  <h2 class="ui header">
+    <%= @t('frontend.views.auth.password.header') %>
+  </h2>
+  <p><%- @t('frontend.views.auth.password.instruction', {email: @email}) %></p>
+</div>
+
+<!-- Password and password confirmation -->
+<div class="required field">
+  <label for="password"><%= @t('frontend.models.user.attributes.password.new_password') %></label>
+  <div class="ui left icon input">
+    <input id="password" name="password" type="password" placeholder="<%= @t('frontend.models.user.attributes.password.new_password') %>">
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<div class="required field">
+  <div class="ui input">
+    <input id="password_confirmation" name="password_confirmation" type="password" placeholder="<%= @t('frontend.models.user.attributes.password.new_password_confirmation') %>">
+  </div>
+</div>
+
+<!-- Submit form -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red button"><%= @t('frontend.form.actions.password_reset') %></button>
+</div>

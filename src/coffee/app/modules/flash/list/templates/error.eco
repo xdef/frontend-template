@@ -1,0 +1,13 @@
+<div class="ui red icon message">
+  <i class="warning sign icon"></i>
+  <i class="close icon"></i>
+  <div class="content">
+    <% if @title: %>
+      <div class="header"><%- @title %></div>
+    <% end %>
+
+    <% if @message: %>
+    <div class="ui bulleted list"><%- @message %></div>
+    <% end %>
+  </div>
+</div>

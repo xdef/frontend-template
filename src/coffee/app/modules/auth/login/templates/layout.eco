@@ -1,0 +1,5 @@
+<div class="ui container">
+  <div class="ui centered padded doubling stackable grid">
+    <div id="form-region" class="six wide computer eight wide tablet column"></div>
+  </div>
+</div>

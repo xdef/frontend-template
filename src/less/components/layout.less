@@ -1,0 +1,46 @@
+@nav-height: 80px;
+@footer-height: 96px;
+
+html, body {
+  height: 100%;
+}
+
+nav {
+  height: @nav-height;
+
+  img {
+    max-height: 48px;
+  }
+}
+
+main {
+  min-height: 100%;
+  margin-top: -@nav-height;
+  margin-bottom: -@footer-height;
+}
+
+main:after {
+  content: "";
+  display: block;
+}
+
+.page-layout {
+  padding-top: @nav-height;
+  padding-bottom: @footer-height;
+}
+
+footer, main:after {
+  height: @footer-height;
+}
+
+footer {
+  width: 100%;
+  padding: 1rem 0;
+  border-top: 1px solid #ddd;
+  text-align: center;
+
+  p {
+    margin-top: 0.8rem;
+    vertical-align: middle;
+  }
+}

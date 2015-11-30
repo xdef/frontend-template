@@ -1,0 +1,49 @@
+<!-- Users email -->
+<div class="required field">
+  <label for="email"><%= @t('frontend.models.user.label.info') %></label>
+  <div class="ui left icon input">
+    <input id="email" name="email" type="text" placeholder="<%= @t('frontend.models.user.attributes.email') %>" autocomplete="email">
+    <i class="mail icon"></i>
+  </div>
+</div>
+
+<!-- Users first and last name -->
+<div class="required field">
+  <div class="ui input">
+    <input id="first_name" name="first_name" type="text" placeholder="<%= @t('frontend.models.user.attributes.first_name') %>" autocomplete="fname">
+  </div>
+</div>
+
+<div class="required field">
+  <div class="ui input">
+    <input id="last_name" name="last_name" type="text" placeholder="<%= @t('frontend.models.user.attributes.last_name') %>" autocomplete="lname">
+  </div>
+</div>
+
+<!-- Password and password confirmation -->
+<div class="required field">
+  <label for="password"><%= @t('frontend.models.user.attributes.password.self') %></label>
+  <div class="ui left icon input">
+    <input id="password" name="password" type="password" placeholder="<%= @t('frontend.models.user.attributes.password.self') %>">
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<div class="required field">
+  <div class="ui input">
+    <input id="password_confirmation" name="password_confirmation" type="password" placeholder="<%= @t('frontend.models.user.attributes.password.password_confirmation') %>">
+  </div>
+</div>
+
+<!-- Terms of Use -->
+<div class="required field">
+  <div class="ui checkbox">
+    <input id="terms_of_use" name="terms_of_use" type="checkbox" tabindex="0" class="hidden">
+    <label for="terms_of_use"><%- @t('frontend.views.auth.register.terms_of_use', { href: '/#!/terms_of_use' }) %></a></label>
+  </div>
+</div>
+
+<!-- Submit form -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui fluid submit red basic button"><%= @t('frontend.form.actions.register') %></button>
+</div>

@@ -1,0 +1,45 @@
+<!-- Users email -->
+<div class="required field">
+  <label for="email"><%= @t('frontend.models.user.attributes.email') %></label>
+  <div class="ui left icon input">
+    <input id="email" name="email" type="text" placeholder="<%= @t('frontend.models.user.attributes.email') %>" autocomplete="email">
+    <i class="mail icon"></i>
+  </div>
+</div>
+
+<!-- Users password -->
+<div class="required field">
+  <label for="password"><%= @t('frontend.models.user.attributes.password.self') %></label>
+  <div class="ui left icon input">
+    <input id="password" name="password" type="password" placeholder="<%= @t('frontend.models.user.attributes.password.self') %>">
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<!-- Forgot password -->
+<div class="field">
+  <a href="forgot"><%= @t('frontend.auth.forgot_password') %></a>
+</div>
+
+<!-- Form submit -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" data-provider="local" class="signin ui fluid submit basic red button">
+    <%= @t('frontend.form.actions.sign_in') %>
+  </button>
+  <div class="ui horizontal divider"><%= @t('frontend.form.helpers.or') %></div>
+  <!-- Providers -->
+  <a href='javascript:void(null);' data-provider="google_oauth2" class="signin ui google plus fluid button">
+    <i class="google plus icon"></i>
+    <%= @t('frontend.form.actions.sign_with', value: 'Google') %>
+  </a>
+  <br>
+  <a href='javascript:void(null);' data-provider="vkontakte" class="signin ui vk fluid button">
+    <i class="vk icon"></i>
+    <%= @t('frontend.form.actions.sign_with', value: 'VKontakte') %>
+  </a>
+  <!-- <br>
+  <a href='javascript:void(null);' data-provider="facebook" class="ui facebook fluid button">
+    <i class="facebook icon"></i>
+    <%= @t('frontend.form.actions.sign_with', value: 'Facebook') %>
+  </a> -->
+</div>
