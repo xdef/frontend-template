@@ -1,0 +1,8 @@
+<!-- User information -->
+<div id="info-region" class="ui vertical segment"></div>
+
+<!-- Menu -->
+<div id="menu-region" class="ui vertical segment"></div>
+
+<!-- Content -->
+<div id="content-region" class="ui vertical segment"></div>

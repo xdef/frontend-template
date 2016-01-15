@@ -1,0 +1,19 @@
+<div class="ui inverted dimmer">
+  <div class="ui text loader"></div>
+</div>
+
+<div  class="ui horizontal list">
+  <div class="item uploader">
+    <div class="ui centered circular bordered image">
+      <% if @avatar?.thumb?.url?: %>
+      <img class="ui small image" src="<%= @avatar.thumb.url %>">
+      <% else: %>
+      <i class="circular user huge grey icon"></i>
+      <% end %>
+    </div>
+    <div class="bottom aligned content">
+      <i class="large red edit icon link icon"></i>
+      <input type="file" name="user[avatar]" style="display: none;">
+    </div>
+  </div>
+</div>

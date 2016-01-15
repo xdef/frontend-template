@@ -15,6 +15,9 @@ define ["app/app", "base.controllers", "./login_view"], (App)->
 
         session = App.reqres.request "session:entity"
         @layout.on "before:show", =>
+          # Local login
+          @getLoginForm session
+
           # Token confirmation
           if params.confirmation_token
             currentUser = App.reqres.request 'user:current:entity'
@@ -29,10 +32,6 @@ define ["app/app", "base.controllers", "./login_view"], (App)->
 
             @getOAuthProviderView session
 
-          # Local login
-          else
-            @getLoginForm session
-
         @region.show @layout
 
       getLayoutView: ->
@@ -44,7 +43,7 @@ define ["app/app", "base.controllers", "./login_view"], (App)->
 
         view.on "submit", (args) =>
           { collection, model, view } = args
-          App.commands.execute "session:create", model, 'local'
+          App.commands.execute "session:create", model
 
         @layout.formRegion.show view
 

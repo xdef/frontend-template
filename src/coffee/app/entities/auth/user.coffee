@@ -11,22 +11,24 @@ define ['app/app', 'base.entities'], (App, Entities) ->
           @trigger 'sign:out'
 
       paramRoot: "user"
-      # urlRoot: Routes.users_path()
+      urlRoot: Routes.users_path()
       localStorage: new Backbone.LocalStorage("Users")
 
       defaults:
         # 0 - undefined
-        # 1 - male
-        # 2 - female
+        # 1 - female
+        # 2 - male
         first_name: undefined
         last_name: undefined
         gender: "0"
         date_of_birth: undefined
 
+
     class Entities.UsersCollection extends Entities.Collection
       model: Entities.User
       # url: Routes.users_path()
       localStorage: new Backbone.LocalStorage("Users")
+
 
     API =
       initializeCurrentUser: ->
@@ -41,7 +43,7 @@ define ['app/app', 'base.entities'], (App, Entities) ->
       getCurrentUser: ->
         @currentUser
 
-      createCurrentUser: (attrs, options) ->
+      saveCurrentUser: (attrs, options) ->
         options = _.defaults options,
           validate: false
           ajaxSync: false
@@ -52,7 +54,7 @@ define ['app/app', 'base.entities'], (App, Entities) ->
         @currentUser.destroy()
         @currentUser = @initializeCurrentUser()
 
-    App.on 'start', (options = {}) ->
+    App.on 'before:start', (options = {}) ->
       API.initializeCurrentUser()
 
     App.reqres.setHandler "user:current:initialize", (args...) ->
@@ -62,7 +64,10 @@ define ['app/app', 'base.entities'], (App, Entities) ->
       API.getCurrentUser()
 
     App.commands.setHandler 'user:current:create', (args...) ->
-      API.createCurrentUser args...
+      API.saveCurrentUser args...
+
+    App.commands.setHandler 'user:current:update', (args...) ->
+      API.saveCurrentUser args...
 
     App.commands.setHandler 'user:current:destroy', (args...) ->
       API.destroyCurrentUser(args...)

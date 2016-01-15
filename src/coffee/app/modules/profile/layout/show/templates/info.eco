@@ -1,0 +1,22 @@
+<div class="ui items">
+  <div class="item">
+    <div class="ui small circular bordered image">
+      <% if @avatar?.thumb?.url?: %>
+      <img src="<%= @avatar.thumb.url %>">
+      <% else: %>
+      <i class="circular user huge grey icon"></i>
+      <% end %>
+    </div>
+    <div class="middle aligned content">
+      <div class="header">
+        <h1>
+          <span data-attr='last_name'><%= @last_name %></span>
+          <span data-attr='first_name'><%= @first_name %></span>
+        </h1>
+      </div>
+      <div class="meta">
+        <span data-attr='email'><%= @email %></span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="required field">
+  <label for="password"><%= @t('frontend.models.user.attributes.password.new_password') %></label>
+  <div class="ui left icon input">
+    <input id="password" name="password" type="password"
+      placeholder="<%= @t('frontend.models.user.attributes.password.new_password') %>">
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<div class="required field">
+  <div class="ui input">
+    <input id="password_confirmation" name="password_confirmation" type="password"
+      placeholder="<%= @t('frontend.models.user.attributes.password.new_password_confirmation') %>">
+  </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="required field">
+  <label for="current_password"><%= @t('frontend.models.user.attributes.password.current_password') %></label>
+  <div class="ui left icon input">
+    <input id="current_password" name="current_password" type="password"
+      placeholder="<%= @t('frontend.models.user.attributes.password.current_password') %>">
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<!-- Submit form -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red basic button">
+    <%= @t('frontend.form.actions.save') %>
+  </button>
+</div>

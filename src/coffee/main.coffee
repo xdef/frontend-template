@@ -20,7 +20,7 @@ requirejs.config
     'semantic-ui-visibility': deps: ['jquery'], exports: '$'
     'semantic-ui-visit':      deps: ['jquery'], exports: '$'
     'semantic-ui-video':      deps: ['jquery'], exports: '$'
-    'semantic-ui-dropown':    deps: ['jquery'], exports: '$'
+    'semantic-ui-dropdown':    deps: ['jquery'], exports: '$'
     'semantic-ui-dimmer':     deps: ['jquery'], exports: '$'
     'semantic-ui-sidebar':    deps: ['jquery'], exports: '$'
     'semantic-ui-popup':      deps: ['jquery'], exports: '$'
@@ -64,6 +64,7 @@ requirejs.config
     'jquery.ui.widget':           '../components/blueimp-file-upload/js/vendor/jquery.ui.widget'
     'jquery.inputmask':           '../components/jquery.inputmask/dist/jquery.inputmask.bundle'
     'pikaday':                    '../components/pikaday/pikaday'
+    'swiper':                     '../components/Swiper/dist/js/swiper'
     'routes':                     'routes/routes'
 
     'semantic-ui-accordion':  '../components/semantic/dist/components/accordion'
@@ -83,7 +84,7 @@ requirejs.config
     'semantic-ui-visibility': '../components/semantic/dist/components/visibility'
     'semantic-ui-visit':      '../components/semantic/dist/components/visit'
     'semantic-ui-video':      '../components/semantic/dist/components/video'
-    'semantic-ui-dropown':    '../components/semantic/dist/components/dropdown'
+    'semantic-ui-dropdown':    '../components/semantic/dist/components/dropdown'
     'semantic-ui-dimmer':     '../components/semantic/dist/components/dimmer'
     'semantic-ui-sidebar':    '../components/semantic/dist/components/sidebar'
     'semantic-ui-popup':      '../components/semantic/dist/components/popup'
@@ -91,9 +92,11 @@ requirejs.config
     'semantic-ui-api':        '../components/semantic/dist/components/api'
     'semantic-ui-transition': '../components/semantic/dist/components/transition'
 
+    'bindings.dropdown':                  'app/base/bindings/dropdown'
     'bindings.uploader':                  'app/base/bindings/uploader'
     'bindings.remote-multiple-dropdown':  'app/base/bindings/remote_multiple_dropdown'
-    'bindings.numeric-input':             'app/base/bindings/inputmask'
+    'bindings.remote-single-dropdown':    'app/base/bindings/remote_single_dropdown'
+    'bindings.inputmask':                 'app/base/bindings/inputmask'
     'bindings.datepicker':                'app/base/bindings/datepicker'
     'bindings.date-range-picker':         'app/base/bindings/date_range_picker'
     'bindings.address':                   'app/base/bindings/address'
@@ -104,29 +107,34 @@ requirejs.config
     'base.controllers', { name: 'base.controllers', location: 'app/base/controllers' }
     'base.views',       { name: 'base.views',       location: 'app/base/views' }
     'entities',         { name: 'entities',         location: 'app/entities' }
-    'i18n',             { name: 'i18n',             location: 'app/modules/i18n' }
     'auth',             { name: 'auth',             location: 'app/modules/auth' }
     'flash',            { name: 'flash',            location: 'app/modules/flash' }
     'i18n',             { name: 'i18n',             location: 'app/modules/i18n' }
+    'nav',              { name: 'nav',              location: 'app/modules/nav' }
     'pages',            { name: 'pages',            location: 'app/modules/pages' }
+    'profile',          { name: 'profile',          location: 'app/modules/profile' }
   ]
 
   modules: [
     {
-      name: 'app/modules/pages/pages_api'
+      name: 'app/modules/auth/auth_api'
       exclude: ['app/app', 'app/vendors', 'base.entities', 'base.views', 'base.controllers']
     }, {
-      name: 'app/modules/auth/auth_api'
+      name: 'app/modules/profile/profile_api'
+      exclude: ['app/app', 'app/vendors', 'base.entities', 'base.views', 'base.controllers']
+    }, {
+      name: 'app/modules/pages/pages_api'
       exclude: ['app/app', 'app/vendors', 'base.entities', 'base.views', 'base.controllers']
     }, {
       name: 'main'
       include: [
-        'app/vendors', 'app/app', 'base.entities', 'base.views', 'base.controllers', 'base.config',
-        'entities', 'auth', 'flash', 'i18n', 'nav', 'pages'
+        'app/vendors', 'app/app', 'base.entities', 'base.views', 'base.controllers', 'base.config', 'entities',
+        'auth', 'flash', 'i18n', 'nav', 'pages', 'profile'
       ]
       exclude: [
-        'app/modules/pages/pages_api'
         'app/modules/auth/auth_api'
+        'app/modules/profile/profile_api'
+        'app/modules/pages/pages_api'
       ]
     }
   ]
@@ -134,8 +142,8 @@ requirejs.config
 require ['app/vendors'], ->
 
   require [
-    'app/app', 'base.entities', 'base.views', 'base.controllers', 'base.config'
-    'entities', 'i18n', 'flash', 'auth', 'pages'
+    'app/vendors', 'app/app', 'base.entities', 'base.views', 'base.controllers', 'base.config', 'entities',
+    'auth', 'flash', 'i18n', 'nav', 'pages', 'profile'
   ], ->
 
     App = require 'app/app'

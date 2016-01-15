@@ -1,0 +1,55 @@
+<!-- Users avatar -->
+<div id="user-avatar-region" class="field"></div>
+
+<!-- Users first and last name -->
+<div class="field">
+  <label for=""><%= @t('frontend.models.user.label.name') %></label>
+  <div class="ui input">
+    <input id="first_name" name="first_name" type="text" placeholder="<%= @t('frontend.models.user.attributes.first_name') %>" autocomplete="fname">
+  </div>
+</div>
+
+<div class="field">
+  <div class="ui input">
+    <input id="last_name" name="last_name" type="text" placeholder="<%= @t('frontend.models.user.attributes.last_name') %>" autocomplete="lname">
+  </div>
+</div>
+
+<!-- Users date of bithsday -->
+<div class="field">
+  <label><%= @t('frontend.models.user.attributes.date_of_birth') %></label>
+  <div class="ui left icon input">
+    <input type="text" name="date_of_birth" class="datepicker" placeholder="<%= @t('frontend.models.user.attributes.date_of_birth') %>">
+    <i class="calendar icon"></i>
+  </div>
+</div>
+
+<!-- Gender -->
+<div class="field">
+  <label for=""><%= @t('frontend.models.user.attributes.gender.self') %></label>
+  <div class="inline fields">
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input id="undefined" type="radio" name="gender" value="0" tabindex="0" class="hidden">
+        <label for="undefined"><%= @t('frontend.models.user.attributes.gender.undefined') %></label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input id="male" type="radio" name="gender" value="1" tabindex="0" class="hidden">
+        <label for="male"><%= @t('frontend.models.user.attributes.gender.female') %></label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input id="female" type="radio" name="gender" value= "2" tabindex="0" class="hidden">
+        <label for="female"><%= @t('frontend.models.user.attributes.gender.male') %></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form submit -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red basic button"><%= @t('frontend.form.actions.save') %></button>
+</div>

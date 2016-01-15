@@ -1,16 +1,22 @@
 define [
   "app/app",
+  "nprogress",
   "./item_view",
   "./collection_view",
   "./composite_view"
   "./layout_view",
-], (App) ->
+], ->
+
+  App = require('app/app')
+  NProgress = require('nprogress')
 
   App.module "Views", (Views, App, Backbone, Mn, $, _) ->
 
     _.extend Mn.View::,
 
       bindings: {}
+
+      showProgress: false
 
       ### Global templates helpers ###
       # https://github.com/marionettejs/backbone.marionette/issues/2164
@@ -38,6 +44,13 @@ define [
           el.css 'height', windowHeight - offset
 
         $(window).trigger 'resize'
+
+      # Progress bar for load page
+      startProgress: ->
+        NProgress.start() if @showProgress
+
+      stopProgress: ->
+        NProgress.done() if @showProgress
 
       # Validations
       validationError: (model) ->

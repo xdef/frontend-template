@@ -4,6 +4,8 @@ define [
 ], ->
   App = new Mn.Application
 
+  App.afterLoginRoute = "/profile"
+
   App.addRegions
     navRegion: "#nav-region"
     flashRegion: "#flash-region"
@@ -19,9 +21,7 @@ define [
       catch
         throw "Option with name \"#{param}\" should be exist in application config"
 
-
   App.on "start", (options = {}) ->
-    console.log "start application", options
     @startHistory pushState: true
 
     unless @getCurrentRoute()

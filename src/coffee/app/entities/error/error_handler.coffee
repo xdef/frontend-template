@@ -21,6 +21,8 @@ define ['app/app', 'base.entities'], (App, Entities) ->
             @notFound model, response, textStatus
           when 422
             @unprocessableEntity model, response, textStatus
+          when 504
+            @gatewayTimeout model, response, textStatus
 
       badRequest: (model, response, textStatus) ->
         #
@@ -49,6 +51,16 @@ define ['app/app', 'base.entities'], (App, Entities) ->
 
         App.commands.execute 'session:destroy'
 
+      notFound: (model, response, options) ->
+        # Notify
+        title = App.reqres.request(
+          'i18n:t', 'frontend.flash.profile.create.error.title')
+
+        msg = response.responseText
+
+        App.vent.trigger 'flash:create',
+          type: 'error', title: title, message: msg
+
       unprocessableEntity: (model, response, textStatus) ->
         if errors = response.responseJSON
           # Populate model by errors from server
@@ -66,6 +78,15 @@ define ['app/app', 'base.entities'], (App, Entities) ->
         # Notify
         title = App.reqres.request(
           'i18n:t', 'frontend.flash.profile.create.error.title')
+
+        App.vent.trigger 'flash:create',
+          type: 'error', title: title, message: msg
+
+      gatewayTimeout: (model, response, textStatus) ->
+        # Notify
+        title = 'Превышен интервал ожидания сервера'
+
+        msg = response.responseText
 
         App.vent.trigger 'flash:create',
           type: 'error', title: title, message: msg

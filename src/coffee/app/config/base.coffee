@@ -15,7 +15,8 @@ define [], ->
     # OAuth2 providers (CLIENT_ID)
     'GOOGLE_API_KEY': '...'
     'GOOGLE_CLIENT_ID': '...'
-    'GOOGLE_SCOPE': ['email', 'profile']
+    'GOOGLE_SCOPE': 'email profile'
+    'GOOGLE_API_ENDPOINT': 'https://accounts.google.com/o/oauth2/v2/auth'
 
     'VK_CLIENT_ID': '...'
     'VK_SCOPE': ['email', 'status', 'offline', 'photos']

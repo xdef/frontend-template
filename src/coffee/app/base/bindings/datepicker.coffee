@@ -13,11 +13,12 @@ define [
     initialize: ($el, model, options) ->
 
       defaults = _.extend {}, options.defaultOptions,
-        theme: 'prezz-theme'
+        theme: 'semantic_ui'
         field: $el[0]
         format: "LL"
         firstDay: 1
         container: $el.parents("div")[0]
+        bound: true
         i18n:
           months: moment.months()
           weekdays: moment.weekdays()

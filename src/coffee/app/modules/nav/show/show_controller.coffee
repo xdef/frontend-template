@@ -7,16 +7,33 @@ define ['app/app', './show_view'], (App) ->
         { @region } = options
         @layout = @getLayoutView()
 
+        currentUser = App.reqres.request 'user:current:entity'
+
         @layout.on "before:show", =>
-          @getMenuView()
+          @getMenuRegion currentUser
 
         @region.show @layout
 
       getLayoutView: ->
         new Show.Layout
 
-      getMenuView: ->
+      getMenuRegion: (user) ->
         view = new Show.Menu
-        @layout.menuRegion.show view
+          model: cart
+
+        App.vent.on "auth:logout:success", ->
+          view.render()
+
+        App.vent.on 'auth:login:success', ->
+          view.render()
+
+        user.on 'change:avatar', ->
+          view.render()
+
+        view.on 'logout', (args) ->
+          { model, collection, view } = args
+          App.commands.execute "session:destroy"
+
+        @layout.showChildView 'menu', view
 
   App.Nav.Show.Controller

@@ -16,9 +16,8 @@ define [
       execute: (callback, args, name) ->
         if App.reqres.request 'user:signed:in?'
           App.navigate App.afterLoginRoute, trigger: true
-
-        if callback
-          callback.apply(this, args)
+        else
+          callback.apply @, args
 
     API =
       login: (args...) ->

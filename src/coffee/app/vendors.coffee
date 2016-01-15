@@ -14,15 +14,17 @@ define [
   'i18n-js'
   'nls.ru'
   'nls.en'
+  'routes'
   'moment-duration-format'
   'semantic-ui-transition'
-  'semantic-ui-dropown'
+  'semantic-ui-dropdown'
   'semantic-ui-dimmer'
   'semantic-ui-popup'
   'semantic-ui-modal'
   'semantic-ui-api'
+  'semantic-ui-rating'
 ], () ->
-  moment = require('moment')
+  window.moment = require('moment')
 
   I18n.defaultLocale = "ru"
   moment.locale I18n.defaultLocale

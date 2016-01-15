@@ -1,0 +1,14 @@
+<div class="field">
+  <div class="ui header">
+    <div class="sub header">
+      Удалить профиль
+    </div>
+  </div>
+</div>
+
+<!-- Submit form -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red basic button">
+    <%- @t 'frontend.form.actions.remove' %>
+  </button>
+</div>

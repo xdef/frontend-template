@@ -1,0 +1,48 @@
+<div class="inline field">
+  <div class="ui checkbox">
+    <input id="notify_by_email" name="notify_by_email" type="checkbox" tabindex="0" class="hidden">
+    <label for="notify_by_email">
+      <h5 class="ui header">
+        Получать уведомления по электронной почте
+        <div class="sub text-justified header">
+          Мы будем оповещать Вас по электронной почте о смене статуса Ваших заказов.
+        </div>
+      </h5>
+    </label>
+  </div>
+</div>
+
+<div class="inline field">
+  <div class="ui checkbox">
+    <input id="notify_by_phone" name="notify_by_phone" type="checkbox" tabindex="0" class="hidden">
+    <label for="notify_by_phone">
+      <h5 class="ui header">
+        Уведомления по SMS
+        <div class="sub text-justified header">
+          Мы будем оповещать Вас по SMS о смене статуса Ваших заказов.
+        </div>
+      </h5>
+    </label>
+  </div>
+</div>
+
+<div class="inline field">
+  <div class="ui checkbox">
+    <input id="receive_delivery" name="receive_delivery" type="checkbox" tabindex="0" class="hidden">
+    <label for="receive_delivery">
+      <h5 class="ui header">
+        Получать рассылку
+        <div class="sub text-justified header">
+          Мы будем держать Вас в курсе наших последних новостей, поступлениях и информировать
+          о предстоящем прогнозе погоды.
+        </div>
+      </h5>
+    </label>
+  </div>
+</div>
+
+
+<!-- Submit form -->
+<div class="ui basic segment center aligned field">
+  <button type="submit" class="ui submit red basic button">Сохранить</button>
+</div>

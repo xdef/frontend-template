@@ -13,6 +13,7 @@ define [
 
       defaults = _.extend {}, options.defaultOptions,
         types: ['geocode']
+        country: 'ru'
 
       google.maps.event.addDomListener $el[0], 'keydown', (e) ->
         if e.keyCode == 13
@@ -22,5 +23,6 @@ define [
       autocomplete = new google.maps.places.Autocomplete $el[0], defaults
 
       autocomplete.addListener 'place_changed', ->
-        location = autocomplete.getPlace().geometry.location
-        model.set "coordinates": [location.lng(), location.lat()]
+        if place = autocomplete.getPlace()
+          location = autocomplete.getPlace().geometry.location
+          model.set "coordinates": [location.lng(), location.lat()]

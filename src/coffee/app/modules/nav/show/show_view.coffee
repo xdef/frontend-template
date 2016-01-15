@@ -10,14 +10,20 @@ define [
   App.module "Nav.Show", (Show, App, Backbone, Mn, $, _) ->
     class Show.Layout extends Views.LayoutView
       template: 'nav/show/templates/layout'
-      tagName: 'nav'
+      className: 'ui labeled icon fixed top menu'
 
       regions:
-        menuRegion: '#menu-region'
+        menu: '#menu-region'
 
     class Show.Menu extends Views.ItemView
       template: 'nav/show/templates/menu'
       className: 'ui container'
+
+      ui:
+        logoutBtn: 'a.logout'
+
+      triggers:
+        'click @ui.logoutBtn': 'logout'
 
       onRender: ->
         options =

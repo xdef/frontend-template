@@ -3,6 +3,7 @@ define ['app/app', 'base.entities'], (App, Entities) ->
   App.module "Entities", (Entities, App, Backbone, Mn, $, _) ->
 
     class Entities.Session extends Entities.Model
+      idAttribute: 'authentication_token'
 
       getHeaders: ->
         headers =
@@ -42,9 +43,10 @@ define ['app/app', 'base.entities'], (App, Entities) ->
             @localProvider session, options
 
           when 'google_oauth2'
-            require ['google-client'], =>
-              gapi.load 'auth2', =>
-                @googleProvider session, options
+            if code?
+              @googleProviderCallback session, options
+            else
+              @googleProvider session, options
 
           when 'vkontakte'
             if code?
@@ -65,30 +67,32 @@ define ['app/app', 'base.entities'], (App, Entities) ->
         session.save {}, options
 
       googleProvider: (session, options) ->
-        unless gapi.auth?
-          throw 'Google Auth2 API not yet loaded'
-
-        gapi.auth.authorize {
-          immediate: false
-          response_type: 'code'
-          cookie_policy: 'single_host_origin'
-          scope: App.reqres.request 'config', 'GOOGLE_SCOPE'
+        params =
           client_id: App.reqres.request 'config', 'GOOGLE_CLIENT_ID'
-        }, (credentials) ->
-          session.validate = session._validateGoogleProvider
+          scope: App.reqres.request 'config', 'GOOGLE_SCOPE'
+          redirect_uri: "#{window.location.origin}/login/google_oauth2"
+          response_type: "code"
 
-          options = _.extend options,
-            url: Routes.user_omniauth_callback_path('google_oauth2')
+        endPoint = App.reqres.request 'config', 'GOOGLE_API_ENDPOINT'
+        queryParams = $.param params
 
-          session.save credentials, options
+        window.location.replace "#{endPoint}?#{queryParams}"
+
+      googleProviderCallback: (session, options) ->
+        session.validate = session._validateVKontakteProvider
+
+        options = _.extend options,
+          url: Routes.user_omniauth_callback_path('google_oauth2')
+
+        session.save {}, options
 
       vkontakteProvider: (session, options) ->
         params =
           client_id: App.reqres.request 'config', 'VK_CLIENT_ID'
           scope: App.reqres.request 'config', 'VK_SCOPE'
           v: App.reqres.request 'config', 'VK_API_VERSION'
-          redirect_uri: "http://e-coach.dev:8080/login/vkontakte"
           response_type: "code"
+          redirect_uri: "#{window.location.origin}/login/vkontakte"
           display: "page"
           revoke: 1
 
@@ -109,7 +113,7 @@ define ['app/app', 'base.entities'], (App, Entities) ->
       successSessionCreate: (model, response, options) ->
         # Create currentUser
         App.commands.execute 'user:current:create', _.omit(
-          model.attributes, 'password', 'authentication_token')
+          model.attributes, 'password', 'authentication_token', 'code')
 
         # Store headers in localStorage
         App.commands.execute 'session:config:store', model
@@ -121,18 +125,9 @@ define ['app/app', 'base.entities'], (App, Entities) ->
         App.vent.trigger 'auth:login:success', model
 
         # Navigate to after_login_path
-        App.navigate App.afterLoginRoute, {trigger: true}
+        App.navigate App.afterLoginRoute, trigger: true
 
-      googleAuthCallback: (credentials) ->
-        $.ajax
-          url: Routes.user_omniauth_callback_path('google_oauth2')
-          type: 'POST'
-          dataType: 'json'
-          data: credentials
-          success: (result) ->
-            console.log result
-
-      destroySession: (user, options = {}) ->
+      destroySession: (options = {}) ->
         options = _.defaults options,
           url: Routes.destroy_user_session_path()
 

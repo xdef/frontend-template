@@ -10,14 +10,25 @@ define [
       t: (args...) ->
         App.reqres.request 'i18n:t', args...
 
-      signed_in: ->
+      l: (args...) ->
+        App.reqres.request 'i18n:l', args...
+
+      isSigned: ->
         App.reqres.request 'user:signed:in?'
+
+      currentUser: ->
+        if App.reqres.request 'user:signed:in?'
+          user = App.reqres.request 'user:current:entity'
+          user.attributes
 
       trunc: (str, n) ->
         if str and str.length > n
           str.substr(0, n-1) + ' ...'
         else
           str
+
+      fullName: (user) ->
+        "#{user.last_name}&nbsp;#{user.first_name}"
 
       formatedDate: (date, format='LLL') ->
         moment(date).format(format)
@@ -26,10 +37,3 @@ define [
         moment
           .duration(duration*1000)
           .format("mm:ss", { forceLength: true, trim: false })
-
-      formatedCost: (cost, currency = 'USD') ->
-        icon = switch currency.toLowerCase()
-          when 'usd' then '<i class="dollar icon"></i>'
-          when 'rub' then '<i class="ruble icon"></i>'
-
-        "#{cost}#{icon}"
