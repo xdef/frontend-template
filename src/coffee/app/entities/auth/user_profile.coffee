@@ -75,22 +75,8 @@ define ['app/app', 'base.entities', './user'], (App, Entities) ->
           url: Routes.user_registration_path()
           ajaxSync: true
 
-          success: (model, response, options) ->
-            # Get email
-            email = model.get('email')
-            url = "/confirm?email=#{email}"
-
-            # Destroy user
-            App.commands.execute 'user:current:destroy'
-
-            # Reinitialize new guest user
-            App.commands.execute 'user:init'
-
-            # Trigger event
-            App.vent.trigger "auth:user:registered", model
-
-            # Navigate to confirmation url
-            App.navigate url, { trigger: true }
+          success: (args...) ->
+            App.vent.trigger 'session:create:success', args...
 
           error: (model, response, options) ->
             #
@@ -99,21 +85,19 @@ define ['app/app', 'base.entities', './user'], (App, Entities) ->
 
       updateProfile: (user, options = {}) ->
         user.validate = user._validateProfileUpdate
-        return unless user.isValid()
 
         options = _.defaults options,
           ajaxSync: true
+          nested: true
 
           success: (model, response, options) ->
             # Update current user in localStorage
             App.commands.execute 'user:current:create', model.attributes
 
             # Notify
-            title = App.reqres.request(
-              'i18n:t', 'frontend.flash.profile.update.success.title')
+            title = "Профиль обновлен"
 
-            msg = App.reqres.request(
-              'i18n:t', 'frontend.flash.profile.update.success.message', {email: model.get('email')})
+            msg = "#{model.get('first_name')}, ваш профиль успешно обновлен!"
 
             App.vent.trigger 'flash:create',
               type: 'success', title: title, message: msg

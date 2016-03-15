@@ -8,6 +8,7 @@ define [
   './auth/session'
   './auth/session_validations'
   './flash/flash'
+  './flash/alert'
 ], (App) ->
 
   App.Entities

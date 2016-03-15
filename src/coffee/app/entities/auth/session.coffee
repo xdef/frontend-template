@@ -116,7 +116,8 @@ define ['app/app', 'base.entities'], (App, Entities) ->
           model.attributes, 'password', 'authentication_token', 'code')
 
         # Store headers in localStorage
-        App.commands.execute 'session:config:store', model
+        App.commands.execute 'session:config:store', _.pick(
+          model.attributes, 'email', 'authentication_token')
 
         # Initialize new session
         App.commands.execute 'session:initialize'
@@ -125,7 +126,13 @@ define ['app/app', 'base.entities'], (App, Entities) ->
         App.vent.trigger 'auth:login:success', model
 
         # Navigate to after_login_path
-        App.navigate App.afterLoginRoute, trigger: true
+        reutnr_url = if @store and url = @store.getItem('return_url')
+          @store.removeItem 'return_url'
+          url
+        else
+          App.afterLoginRoute
+
+        App.navigate reutnr_url, trigger: true
 
       destroySession: (options = {}) ->
         options = _.defaults options,
@@ -161,11 +168,14 @@ define ['app/app', 'base.entities'], (App, Entities) ->
 
         store
 
-      storeConfig: (session, options = {}) ->
+      storeConfig: (params = {}) ->
         @store ||= @getStore()
 
-        @store.setItem 'email', session.get('email')
-        @store.setItem 'authentication_token', session.get('authentication_token')
+        for key, value of params
+          @store.setItem key, value
+
+        # @store.setItem 'email', session.get('email')
+        # @store.setItem 'authentication_token', session.get('authentication_token')
 
       removeConfig: (options = {}) ->
         @store ||= @getStore()
