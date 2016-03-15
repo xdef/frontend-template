@@ -1,4 +1,4 @@
-define ['app/app', "./nav_api"], (App, API) ->
+define ['app/app', "./api"], (App, API) ->
 
   App.module "Home", (Home, App, Backbone, Mn, $, _) ->
 
