@@ -13,6 +13,10 @@ define ["app/app", "base.controllers", "./login_view"], (App)->
           currentUser = App.reqres.request 'user:current:entity'
           currentUser.set _.pick(params, 'confirmation_token')
 
+        if params.return_url
+          App.commands.execute "session:config:store", _.pick(
+            params, 'return_url')
+
         session = App.reqres.request "session:entity"
         @layout.on "before:show", =>
           # Local login
