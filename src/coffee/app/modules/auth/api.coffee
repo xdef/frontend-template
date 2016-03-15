@@ -14,8 +14,9 @@ define [
         provider: provider
         params: $.deparam(params)
 
-    register: (params = {}) ->
+    register: (params = "") ->
       new App.Auth.Register.Controller
+        params: $.deparam(params)
         region: App.mainRegion
 
     forgot: (params = {}) ->

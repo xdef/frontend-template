@@ -5,11 +5,16 @@ define [
   './notifications/notifications_controller'
   './password/password_controller'
   './remove/remove_controller'
+  './contract/contract_controller'
 ], (App) ->
 
   API =
     show: (args...) ->
       new App.Profile.Show.Controller
+        region: @_getContentRegion()
+
+    contract: () ->
+      new App.Profile.Contract.Controller
         region: @_getContentRegion()
 
     notifications: (args...) ->
