@@ -21,23 +21,23 @@ define [
 
     API =
       login: (args...) ->
-        require ['app/modules/auth/auth_api'], (Actions) ->
+        require ['app/modules/auth/api'], (Actions) ->
           Actions.login(args...)
 
       register: (args...) ->
-        require ['app/modules/auth/auth_api'], (Actions) ->
+        require ['app/modules/auth/api'], (Actions) ->
           Actions.register(args...)
 
       forgot: (args...) ->
-        require ['app/modules/auth/auth_api'], (Actions) ->
+        require ['app/modules/auth/api'], (Actions) ->
           Actions.forgot(args...)
 
       password: (args...) ->
-        require ['app/modules/auth/auth_api'], (Actions) ->
+        require ['app/modules/auth/api'], (Actions) ->
           Actions.password(args...)
 
       confirm: (args...) ->
-        require ['app/modules/auth/auth_api'], (Actions) ->
+        require ['app/modules/auth/api'], (Actions) ->
           Actions.confirm(args...)
 
     Auth.on 'before:start', (options = {}) ->
