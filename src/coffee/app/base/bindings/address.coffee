@@ -23,6 +23,7 @@ define [
       autocomplete = new google.maps.places.Autocomplete $el[0], defaults
 
       autocomplete.addListener 'place_changed', ->
+        window.autocompete = autocomplete
         if place = autocomplete.getPlace()
           location = autocomplete.getPlace().geometry.location
           model.set "coordinates": [location.lng(), location.lat()]

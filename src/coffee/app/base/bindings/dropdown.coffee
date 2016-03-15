@@ -9,8 +9,15 @@ define [
     selector: "input.dropdown"
 
     initialize: ($el, model, options) ->
-      defaults = _.defaults {}, options.defaultOptions
+      defaults = _.defaults options.defaultOptions, {}
       $el.parent().dropdown(defaults)
 
     update: ($el, val, model, options) ->
-      $el.parent().dropdown 'set selected', val
+      if _.isEmpty val
+        setTimeout ->
+          $el.parent().dropdown 'clear'
+        , 1
+      else
+        setTimeout ->
+          $el.parent().dropdown 'set selected', val
+        , 1

@@ -6,7 +6,7 @@ define ['backbone', 'backbone.stickit', 'jquery.file.upload'], ->
 
       defaults = _.defaults {}, options.defaultOptions,
         url: model.url()
-        type: "POST"
+        type: "PUT"
         dataType: "json"
         progressInterval: 100
         bitrateInterval: 100
@@ -16,6 +16,11 @@ define ['backbone', 'backbone.stickit', 'jquery.file.upload'], ->
       uploader = $el.fileupload _.extend(defaults, options.uploadOptions)
 
       uploader.bind 'fileuploaddone', (e, data) ->
+        attrs = {}
+        field = options.observe
+        attrs[field] = data.result[field]
+
+        model.set attrs
         model.trigger 'upload:done', data
 
       uploader.bind 'fileuploadprogressall', (e, data) ->

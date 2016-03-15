@@ -34,11 +34,11 @@ define [
 
     onSet: (val, options) ->
       moment val, "LL"
-        .toISOString()
+        .toISOString() if val
 
     onGet: (val, options) ->
       moment val
-        .format "LL"
+        .format("LL") if val
 
     destroy: ($el, model, options) ->
       @pikaday.destroy()
