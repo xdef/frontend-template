@@ -1,0 +1,95 @@
+@header_height: 3rem;
+@controls_height: 0rem;
+@item_offset: 0.5rem;
+
+.search-map {
+  position: absolute;
+  width: 100%; height: 100%;
+  padding-top: @nav-height;
+
+  .map {
+    width: 100%;
+    height: 100%;
+
+    .map-wrapper {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .map-messages {
+    position: absolute;
+    width: 80%; max-width: 768px;
+    left: 0; right: 0;
+    padding: 0.2rem 0.8rem;
+    color: #fff;
+    margin: 0 auto;
+    bottom: 1rem;
+    border: 1px solid rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 4px;
+  }
+
+  .map-filter {
+    position: absolute;
+    top: 1rem;
+    width: 80%; max-width: 768px;
+    left: 0; right: 0;
+    margin: 0 auto;
+
+    .menu { margin-bottom: 0; }
+  }
+
+  .map-info {
+    .cards { min-height: 72px; }
+  }
+
+  .grid {
+    height: 100%;
+    .column { padding: 0 !important; }
+  }
+
+  .search-row {
+    position: absolute !important;
+    width: 100%; height: 100%;
+    padding: 0 !important;
+  }
+
+  .search-row > .search-item {
+    position: relative;
+    margin-top: @item_offset;
+
+    &:last-child { margin-top: 0; }
+
+    &.header {
+      height: @header_height;
+      padding: 0 @item_offset;
+      z-index: 1;
+
+      .list {
+        margin-top: 0;
+      }
+    }
+
+    &.result {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0rem;
+      padding-top: @header_height + 3*@item_offset;
+      box-sizing: padding-box;
+
+      .scroll-wrapper {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.item-new.btn.fixed {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0rem;
+}

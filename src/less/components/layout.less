@@ -11,6 +11,10 @@ nav {
   img {
     max-height: 48px;
   }
+
+  .fixed.top.menu {
+    z-index: 1001 !important;
+  }
 }
 
 main {
@@ -22,11 +26,14 @@ main {
 main:after {
   content: "";
   display: block;
+  overflow: hidden;
 }
 
 .page-layout {
+  position: relative;
   padding-top: @nav-height;
-  padding-bottom: @footer-height/2;
+  // padding-bottom: @footer-height/2;
+  min-height: 100%;
 }
 
 footer, main:after {

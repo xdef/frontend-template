@@ -1,5 +1,5 @@
 requirejs.config
-  urlArgs: "rev=0.0.1"
+  urlArgs: "rev=0.0.6"
   baseUrl: 'js'
 
   shim:
@@ -20,7 +20,7 @@ requirejs.config
     'semantic-ui-visibility': deps: ['jquery'], exports: '$'
     'semantic-ui-visit':      deps: ['jquery'], exports: '$'
     'semantic-ui-video':      deps: ['jquery'], exports: '$'
-    'semantic-ui-dropdown':    deps: ['jquery'], exports: '$'
+    'semantic-ui-dropdown':   deps: ['jquery'], exports: '$'
     'semantic-ui-dimmer':     deps: ['jquery'], exports: '$'
     'semantic-ui-sidebar':    deps: ['jquery'], exports: '$'
     'semantic-ui-popup':      deps: ['jquery'], exports: '$'
@@ -33,6 +33,14 @@ requirejs.config
     'moment-duration-format':     deps: ['moment']
     'nls.ru':                     deps: ['i18n-js'],  exports: 'I18n'
     'nls.en':                     deps: ['i18n-js'],  exports: 'I18n'
+
+    'amcharts.serial':  deps: ['amcharts']
+    'amcharts.theme-light': deps: ['amcharts']
+
+    'trumbowyg': deps: ['jquery'], exports: '$'
+    'trumbowyg.locale-ru': deps: ['trumbowyg']
+
+    'lightbox': deps: ['jquery'], exports: '$'
 
   paths:
     'async':                      '../components/requirejs-plugins/src/async'
@@ -53,6 +61,7 @@ requirejs.config
     'nls.en':                     'translations/en'
     'google-maps':                'https://maps.googleapis.com/maps/api/js?v=3&key=API_KEY&libraries=places'
     'google-client':              'https://apis.google.com/js/client'
+    'google-maps-clusterer':      '../components/js-marker-clusterer/src/markerclusterer'
     'fullPage':                   '../components/fullpage.js/jquery.fullPage'
     'moment':                     '../components/moment/moment'
     'moment-ru':                  '../components/moment/locale/ru'
@@ -65,6 +74,7 @@ requirejs.config
     'jquery.inputmask':           '../components/jquery.inputmask/dist/jquery.inputmask.bundle'
     'pikaday':                    '../components/pikaday/pikaday'
     'swiper':                     '../components/Swiper/dist/js/swiper'
+    'scrollbar':                  '../components/perfect-scrollbar/js/perfect-scrollbar'
     'routes':                     'routes/routes'
 
     'semantic-ui-accordion':  '../components/semantic/dist/components/accordion'
@@ -92,14 +102,26 @@ requirejs.config
     'semantic-ui-api':        '../components/semantic/dist/components/api'
     'semantic-ui-transition': '../components/semantic/dist/components/transition'
 
-    'bindings.dropdown':                  'app/base/bindings/dropdown'
+    'amcharts':                '../components/amcharts3/amcharts/amcharts'
+    'amcharts.serial':         '../components/amcharts3/amcharts/serial'
+    'amcharts.theme-light':    '../components/amcharts3/amcharts/themes/light'
+
+    'trumbowyg':               '../components/trumbowyg/dist/trumbowyg'
+    'trumbowyg.locale-ru':     '../components/trumbowyg/dist/langs/ru.min'
+
+    'lightbox':                 '../components/imagelightbox2/dist/imagelightbox.min'
+
     'bindings.uploader':                  'app/base/bindings/uploader'
     'bindings.remote-multiple-dropdown':  'app/base/bindings/remote_multiple_dropdown'
     'bindings.remote-single-dropdown':    'app/base/bindings/remote_single_dropdown'
+    'bindings.dropdown':                  'app/base/bindings/dropdown'
     'bindings.inputmask':                 'app/base/bindings/inputmask'
     'bindings.datepicker':                'app/base/bindings/datepicker'
     'bindings.date-range-picker':         'app/base/bindings/date_range_picker'
     'bindings.address':                   'app/base/bindings/address'
+    'bindings.toggle':                    'app/base/bindings/toggle'
+    'bindings.trumbowyg':                 'app/base/bindings/trumbowyg'
+    'bindings.menu':                      'app/base/bindings/menu'
 
   packages: [
     'base.config',      { name: 'base.config',      location: 'app/config' }
@@ -111,30 +133,31 @@ requirejs.config
     'flash',            { name: 'flash',            location: 'app/modules/flash' }
     'i18n',             { name: 'i18n',             location: 'app/modules/i18n' }
     'nav',              { name: 'nav',              location: 'app/modules/nav' }
+    'alert',            { name: 'alert',            location: 'app/modules/alert' }
     'pages',            { name: 'pages',            location: 'app/modules/pages' }
     'profile',          { name: 'profile',          location: 'app/modules/profile' }
   ]
 
   modules: [
     {
-      name: 'app/modules/auth/auth_api'
+      name: 'app/modules/auth/api'
       exclude: ['app/app', 'app/vendors', 'base.entities', 'base.views', 'base.controllers']
     }, {
-      name: 'app/modules/profile/profile_api'
+      name: 'app/modules/profile/api'
       exclude: ['app/app', 'app/vendors', 'base.entities', 'base.views', 'base.controllers']
     }, {
-      name: 'app/modules/pages/pages_api'
+      name: 'app/modules/pages/api'
       exclude: ['app/app', 'app/vendors', 'base.entities', 'base.views', 'base.controllers']
     }, {
       name: 'main'
       include: [
         'app/vendors', 'app/app', 'base.entities', 'base.views', 'base.controllers', 'base.config', 'entities',
-        'auth', 'flash', 'i18n', 'nav', 'pages', 'profile'
+        'auth', 'flash', 'i18n', 'nav', 'alert', 'pages', 'profile'
       ]
       exclude: [
-        'app/modules/auth/auth_api'
-        'app/modules/profile/profile_api'
-        'app/modules/pages/pages_api'
+        'app/modules/auth/api'
+        'app/modules/profile/api'
+        'app/modules/pages/api'
       ]
     }
   ]
@@ -143,7 +166,7 @@ require ['app/vendors'], ->
 
   require [
     'app/vendors', 'app/app', 'base.entities', 'base.views', 'base.controllers', 'base.config', 'entities',
-    'auth', 'flash', 'i18n', 'nav', 'pages', 'profile'
+    'auth', 'flash', 'i18n', 'nav', 'alert', 'pages', 'profile'
   ], ->
 
     App = require 'app/app'
