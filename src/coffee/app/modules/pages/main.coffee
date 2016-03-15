@@ -9,7 +9,7 @@ define ['app/app'], (App, API) ->
 
     API =
       home: (args...) ->
-        require ['app/modules/pages/pages_api'], (Actions) ->
+        require ['app/modules/pages/api'], (Actions) ->
           Actions.home(args...)
 
     Pages.on "start", (options = {}) ->
