@@ -14,6 +14,9 @@ define ['app/app'], (App) ->
       # Items per page
       size: 24
 
+      # Paginated?
+      isPaginated: true
+
       parse: (response, options) ->
         if response.meta
           { @number, @total, @count } = response.meta
@@ -34,7 +37,9 @@ define ['app/app'], (App) ->
 
       fetch: (options = {}) ->
         options.data ||= {}
-        _.defaults options.data,
-          page: { number: @number, size: @size }
+
+        if @isPaginated is true
+          _.defaults options.data,
+            page: { number: @number, size: @size }
 
         Backbone.Collection.prototype.fetch.call(@, options)
