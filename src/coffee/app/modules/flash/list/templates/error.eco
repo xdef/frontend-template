@@ -1,4 +1,4 @@
-<div class="ui red icon message">
+<div class="ui error icon message">
   <i class="warning sign icon"></i>
   <i class="close icon"></i>
   <div class="content">
@@ -7,7 +7,7 @@
     <% end %>
 
     <% if @message: %>
-    <div class="ui bulleted list"><%- @message %></div>
+    <p><%- @message %></p>
     <% end %>
   </div>
 </div>
