@@ -21,11 +21,19 @@ define ['backbone.marionette'], ->
     startHistory: (options = {}) ->
       if Backbone.history
         Backbone.history.start(options)
-        @hijack() if options.pushState
+        @hijack() if options.pushState is true
+
+        Backbone.history.on "route", @scrollUp
 
     hijack: ->
       $document = $(window.document)
       openLinkInTab = false
+
+      is_relative_to_page = (href) ->
+        _.isNull href.match(/^\/\/|(http:|https:|ftp:|mailto:|javascript:)/)
+
+      is_routable = (href) ->
+        href.indexOf("#") is -1 and is_relative_to_page(href) and not openLinkInTab
 
       $document.keydown (e) ->
         openLinkInTab = true if e.ctrlKey or e.keyCode is 91
@@ -33,13 +41,12 @@ define ['backbone.marionette'], ->
       $document.keyup (e) ->
         openLinkInTab = false
 
-      $(document).on "click", "a", (e) ->
+      $(document).on "click", "a[href]:not([data-bypass])", (e) ->
         href = $(@).attr("href")
-        domain = $(@).prop("hostname")
 
-        isCSRF = domain is not document.location.hostname
-        hasHashLink = href.indexOf("#") is -1
-
-        if !openLinkInTab and !isCSRF and hasHashLink
+        if is_routable href
           e.preventDefault()
           Backbone.history.navigate href, true
+
+    scrollUp: ->
+      $("body").animate {"scrollTop" : 0}, 100
