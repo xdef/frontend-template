@@ -24,8 +24,11 @@
     </div>
   </div>
   <% else: %>
-  <a href="login" class="middle item" href="login">
-    <i class="add user icon"></i>
+  <a href="/register" class="item" href="login">
+    Регистрация
+  </a>
+  <a href="/login" class="item" href="login">
+    Войти
   </a>
   <% end %>
 </div>

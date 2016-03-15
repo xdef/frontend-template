@@ -19,7 +19,6 @@ define ['app/app', './show_view'], (App) ->
 
       getMenuRegion: (user) ->
         view = new Show.Menu
-          model: cart
 
         App.vent.on "auth:logout:success", ->
           view.render()

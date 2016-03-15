@@ -1,4 +1,4 @@
-define ['app/app', 'base.entities', '../person/organization', '../person/contact'], (App, Entities) ->
+define ['app/app', 'base.entities'], (App, Entities) ->
 
   App.module "Entities", (Entities, App, Backbone, Mn, $, _) ->
 

@@ -10,7 +10,7 @@ define [
   App.module "Nav.Show", (Show, App, Backbone, Mn, $, _) ->
     class Show.Layout extends Views.LayoutView
       template: 'nav/show/templates/layout'
-      className: 'ui labeled icon fixed top menu'
+      className: 'ui fixed top menu'
 
       regions:
         menu: '#menu-region'
