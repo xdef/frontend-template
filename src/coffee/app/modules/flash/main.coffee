@@ -1,4 +1,4 @@
-define ['app/app', "./flash_api"], (App, API) ->
+define ['app/app', "./api"], (App, API) ->
 
   App.module "Flash", (Flash, App, Backbone, Mn, $, _) ->
 
